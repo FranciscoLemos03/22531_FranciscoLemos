@@ -8,13 +8,20 @@ import androidx.annotation.IntegerRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.calculator.ui.theme.CalculatorTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +30,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CalculatorTheme {
-                    CalculateShape(7.10)
+                    CalculateShape(0.0)
             }
         }
     }
@@ -34,91 +41,96 @@ class MainActivity : ComponentActivity() {
 fun CalculateShape(number: Double, modifier: Modifier = Modifier) {
 
     Column {
-        Text(
-            text = "$number",
-            modifier = modifier
-        )
-        Row {
-            ElevatedButton(onClick = { }) {
+        Row ( modifier = Modifier.fillMaxWidth() .wrapContentSize(Alignment.Center)) {
+            Text(
+                text = "$number",
+                fontSize = 25.sp,
+                modifier = Modifier.padding(3.dp),
+                textAlign = TextAlign.Center
+            )
+        }
+        Row ( modifier = Modifier.fillMaxWidth()) {
+
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("MRC")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("M-")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("M+")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("ON/C")
             }
         }
-        Row {
-            ElevatedButton(onClick = { }) {
+        Row ( modifier = Modifier.fillMaxWidth()) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("√")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("%")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("+/-")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("CE")
             }
         }
-        Row {
-            ElevatedButton(onClick = { }) {
+        Row ( modifier = Modifier.fillMaxWidth()) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("7")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("8")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("9")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("÷")
             }
         }
-        Row {
-            ElevatedButton(onClick = { }) {
+        Row ( modifier = Modifier.fillMaxWidth()) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("4")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("5")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("6")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("x")
             }
         }
-        Row {
-            ElevatedButton(onClick = { }) {
+        Row ( modifier = Modifier.fillMaxWidth()) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("1")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("2")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("3")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("-")
             }
         }
-        Row {
-            ElevatedButton(onClick = { }) {
+        Row ( modifier = Modifier.fillMaxWidth()) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("0")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("•")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("=")
             }
-            ElevatedButton(onClick = { }) {
+            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
                 Text("+")
             }
         }
@@ -128,5 +140,5 @@ fun CalculateShape(number: Double, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    CalculateShape(7.10)
+    CalculateShape(0.0)
 }

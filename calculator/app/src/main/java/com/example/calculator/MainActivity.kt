@@ -12,12 +12,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,7 +32,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CalculatorTheme {
-                    CalculateShape(0.0)
+                CalculateShape(0.0)
             }
         }
     }
@@ -51,86 +53,184 @@ fun CalculateShape(number: Double, modifier: Modifier = Modifier) {
         }
         Row ( modifier = Modifier.fillMaxWidth()) {
 
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
-                Text("MRC")
-            }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
-                Text("M-")
-            }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
-                Text("M+")
-            }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
+                    Text("MRC")
+                }
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
+                    Text("M-")
+                }
+
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
+                    Text("M+")
+                }
+
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Red
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("ON/C")
             }
         }
         Row ( modifier = Modifier.fillMaxWidth()) {
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("√")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("%")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("+/-")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Red
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("CE")
             }
         }
         Row ( modifier = Modifier.fillMaxWidth()) {
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("7")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("8")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("9")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("÷")
             }
         }
         Row ( modifier = Modifier.fillMaxWidth()) {
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("4")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("5")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("6")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("x")
             }
         }
         Row ( modifier = Modifier.fillMaxWidth()) {
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("1")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("2")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("3")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("-")
             }
         }
         Row ( modifier = Modifier.fillMaxWidth()) {
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("0")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("•")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Gray
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("=")
             }
-            ElevatedButton(onClick = { }, modifier = Modifier.weight(1f)) {
+            ElevatedButton(onClick = { },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black
+                ),
+                modifier = Modifier.weight(1f)) {
                 Text("+")
             }
         }

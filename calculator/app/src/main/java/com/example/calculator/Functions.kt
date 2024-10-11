@@ -1,5 +1,6 @@
 package com.example.calculator
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +16,12 @@ class Functions : ViewModel() {
     private var operator: String? = null
     private var isCalculatorOn: Boolean = false
 
+    private val lastTwoButtons = mutableListOf<String>()
+
     fun onButtonClick(btn: String) {
+
+        updateLastTwoButtons(btn)
+
         when (btn) {
             "ON/C" -> {
                 //Ligar e resetar os valores
@@ -24,6 +30,47 @@ class Functions : ViewModel() {
                 previousNumber = null
                 operator = null
                 isCalculatorOn = true
+                Log.i("ON/C antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
+                return
+            }
+
+            "M+" -> {
+                // Verifica se a calculadora está ligada
+                if (isCalculatorOn) {
+                    val currentTextValue = _ResultText.value?.toDoubleOrNull() ?: 0.0
+                    previousNumber = (previousNumber ?: 0.0) + currentTextValue
+                    _ResultText.value = previousNumber.toString()
+                }
+                Log.i("M+ antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
+                return
+            }
+
+            "M-" -> {
+                // Verifica se a calculadora está ligada
+                if (isCalculatorOn) {
+                    val currentTextValue = _ResultText.value?.toDoubleOrNull() ?: 0.0
+                    previousNumber = (previousNumber ?: 0.0) - currentTextValue
+                    _ResultText.value = previousNumber.toString()
+                }
+                Log.i("M- antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
+                return
+            }
+
+            "MRC" -> {
+
+                if (isCalculatorOn) {
+                    if (lastTwoButtons.count { it == "MRC" } == 2) {
+                        // Se os dois últimos botões foram "MRC", reseta os valores
+                        currentNumber = null
+                        previousNumber = null
+                        _ResultText.value = "0"
+                    } else {
+                        currentNumber = previousNumber
+                        previousNumber = null
+                        _ResultText.value = currentNumber?.toString() ?: "0"
+                    }
+                }
+                Log.i("MRC antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
@@ -41,6 +88,7 @@ class Functions : ViewModel() {
                     currentNumber = null // Limpa o currentNumber para o próximo número
                     _ResultText.value = "0.0" //Prepara para o próximo número
                 }
+                Log.i("+ antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
@@ -57,6 +105,7 @@ class Functions : ViewModel() {
                     currentNumber = null // Limpa o currentNumber para o próximo número
                     _ResultText.value = "0.0" // Prepara para o próximo número
                 }
+                Log.i("- antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
@@ -73,6 +122,7 @@ class Functions : ViewModel() {
                     currentNumber = null // Limpa o currentNumber para o próximo número
                     _ResultText.value = "0.0" // Prepara para o próximo número
                 }
+                Log.i("x antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
@@ -89,23 +139,34 @@ class Functions : ViewModel() {
                     currentNumber = null // Limpa o currentNumber para o próximo número
                     _ResultText.value = "0.0" // Prepara para o próximo número
                 }
+                Log.i("dividir antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
             "√" -> {
+                currentNumber = _ResultText.value?.toDoubleOrNull()
                 if (isCalculatorOn) {
                     _ResultText.value?.let {
-                        val result = it.toDoubleOrNull()?.let { num -> sqrt(num) }
-                        _ResultText.value = result?.toString() ?: "Error"
+                        currentNumber = it.toDoubleOrNull()?.let { num -> sqrt(num) }
+                        previousNumber = _ResultText.value?.toDoubleOrNull()
+                        _ResultText.value = currentNumber.toString()
                     }
                 }
+
+                Log.i("raiz antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
             "CE" -> {
                 if (isCalculatorOn) {
+
                     _ResultText.value = _ResultText.value?.dropLast(1)?.ifEmpty { "0.0" }
+
+                    if(_ResultText.value?.endsWith(".") == true){
+                        _ResultText.value += "0"
+                    }
                 }
+                Log.i("CE antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
@@ -113,12 +174,14 @@ class Functions : ViewModel() {
                 if (isCalculatorOn) {
                     currentNumber = _ResultText.value?.toDoubleOrNull()
                     if (currentNumber != null && currentNumber != 0.0) {
-                        previousNumber = currentNumber
-                        _ResultText.value = (-currentNumber!!).toString()
+                        previousNumber = _ResultText.value?.toDoubleOrNull()
+                        _ResultText.value = (-previousNumber!!).toString()
+                        currentNumber = _ResultText.value?.toDoubleOrNull()
                     } else if (currentNumber == 0.0) {
                         _ResultText.value = currentNumber.toString()
                     }
                 }
+                Log.i("+/- antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
@@ -126,11 +189,12 @@ class Functions : ViewModel() {
                 if (isCalculatorOn) {
                     currentNumber = _ResultText.value?.toDoubleOrNull()
                     if (currentNumber != null) {
-                        previousNumber = currentNumber
-                        val result = currentNumber!! / 100
-                        _ResultText.value = result.toString()
+                        previousNumber = _ResultText.value?.toDoubleOrNull()
+                        currentNumber =  previousNumber!! / 100
+                        _ResultText.value = currentNumber.toString()
                     }
                 }
+                Log.i("% antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
@@ -138,11 +202,13 @@ class Functions : ViewModel() {
                 if (isCalculatorOn) {
                     currentNumber = _ResultText.value?.toDoubleOrNull()
                     if (previousNumber != null && currentNumber != null && operator != null) {
-                        previousNumber = performOperation(previousNumber!!, currentNumber!!, operator!!)
-                        _ResultText.value = previousNumber.toString()
+                        currentNumber = performOperation(previousNumber!!, currentNumber!!, operator!!)
+                        previousNumber = _ResultText.value?.toDoubleOrNull()
+                        _ResultText.value = currentNumber.toString()
                         operator = null // Reseta o operador após a operação
                     }
                 }
+                Log.i("= antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
 
@@ -158,6 +224,7 @@ class Functions : ViewModel() {
                         }
                     }
                 }
+                Log.i("decimal antes / atual", previousNumber.toString() + " / " + currentNumber.toString())
                 return
             }
         }
@@ -169,7 +236,17 @@ class Functions : ViewModel() {
             } else {
                 _ResultText.value += btn
             }
+            Log.i("Number -> ", previousNumber.toString() + " / " + currentNumber.toString())
         }
+    }
+
+    private fun updateLastTwoButtons(btn: String) {
+        // armazenar os ultimos 2 botões clicados
+        if (lastTwoButtons.size >= 2) {
+            lastTwoButtons.removeAt(0)
+        }
+        lastTwoButtons.add(btn)
+        Log.i("Last two Buttons", "$lastTwoButtons -> $btn")
     }
 
     private fun performOperation(num1: Double, num2: Double, op: String): Double {
@@ -183,7 +260,7 @@ class Functions : ViewModel() {
             } else {
                 num1 / num2
             }
-            else -> num1 // Retorna o primeiro número se a operação não for reconhecida
+            else -> num1
         }
     }
 }

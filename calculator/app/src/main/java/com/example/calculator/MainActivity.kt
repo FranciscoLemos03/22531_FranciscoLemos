@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -88,20 +90,29 @@ fun CalculateShape(viewModel: Functions) {
 
     Column(
         modifier = Modifier
-        .fillMaxWidth()
-        .background(Color(0xFF8f8e8a))
-        .wrapContentSize(Alignment.Center)
+            .fillMaxSize() // Para ocupar a tela inteira
+            .background(Color(0xFF8f8e8a))
+            .wrapContentSize(Alignment.Center),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row ( modifier = Modifier.fillMaxWidth() .wrapContentSize(Alignment.Center)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentSize(Alignment.Center)
+        ) {
             Text(
-                text = resultText.value?:"",
+                text = resultText.value ?: "",
                 fontSize = 25.sp,
                 modifier = Modifier.padding(3.dp),
                 textAlign = TextAlign.Center
             )
         }
-        LazyVerticalGrid(columns = GridCells.Fixed(4)) {
-            items(buttonOpList){
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(4),
+            modifier = Modifier.padding(16.dp) // Margem para centralizar melhor
+        ) {
+            items(buttonOpList) {
                 CalculatorBtn(icon = it, onClick = {
                     viewModel.onButtonClick(it)
                 })
@@ -109,6 +120,7 @@ fun CalculateShape(viewModel: Functions) {
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
